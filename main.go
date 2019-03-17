@@ -22,7 +22,7 @@ func (app *applets) Applet_main(args []string) {
 	functionName := fmt.Sprintf("Applet_%v", appletName)
 	function := obj.MethodByName(functionName)
 	if function != (reflect.Value{}) {
-		values := []reflect.Value{reflect.ValueOf(args[1:])}
+		values := []reflect.Value{reflect.ValueOf(args)}
 		function.Call(values)
 	} else {
 		fmt.Print("applet not found\n")
