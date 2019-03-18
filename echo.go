@@ -18,7 +18,7 @@ func (app *applets) Applet_echo(args []string) {
 			chars1 := []string{`\a`, `\b`, `\e`, `\f`, `\n`, `\r`, `\t`, `\v`, `\\`, `\0`}
 			chars2 := []byte{'\a', '\b', 27, '\f', '\n', '\r', '\t', '\v', '\\', '\\'}
 			for j := range chars1 {
-				args[i] = strings.ReplaceAll(args[i], string(chars1[j]), string(chars2[j]))
+				args[i] = strings.Replace(args[i], string(chars1[j]), string(chars2[j]), -1)
 			}
 		}
 		if i != 0 {

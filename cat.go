@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"io"
 	"os"
 )
 
@@ -21,7 +22,9 @@ func (app *applets) Applet_cat(args []string) {
 		reader := bufio.NewReader(file)
 		for {
 			line, _, err := reader.ReadLine()
-			if err != nil {
+			if err == io.EOF {
+				break
+			} else if err != nil {
 				retval = 1
 				break
 			}
