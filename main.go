@@ -25,6 +25,6 @@ func (app *applets) Applet_main(args []string) {
 		values := []reflect.Value{reflect.ValueOf(args)}
 		function.Call(values)
 	} else {
-		fmt.Print("applet not found\n")
+		fmt.Fprintln(os.Stderr, "applet not found\n")
 	}
 }
