@@ -6,7 +6,7 @@ import (
 )
 
 func (app *applets) Applet_busybox(args []string) {
-	if len(args) > 0 {
+	if len(args) > 1 {
 		app.Applet_main(args[1:])
 	} else {
 		fmt.Fprintf(os.Stderr, `%v
