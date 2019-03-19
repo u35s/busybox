@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"os/signal"
 	"strings"
 	"syscall"
@@ -44,11 +45,16 @@ func (app *applets) Applet_nohup(args []string) {
 	}
 
 	if isatty.IsTerminal(os.Stderr.Fd()) {
-		syscall.Dup2(1, int(os.Stderr.Fd()))
+		syscall.Dup3(1, int(os.Stderr.Fd()), 0)
 	}
 
 	signal.Ignore(syscall.SIGHUP)
 	if !app.exec(args[1:]) {
-		syscall.Exec(args[1], args[1:], os.Environ())
+		path, err := exec.LookPath(args[0])
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "%v", err)
+			os.Exit(127)
+		}
+		syscall.Exec(path, args[1:], os.Environ())
 	}
 }
