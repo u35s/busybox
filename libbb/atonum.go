@@ -6,6 +6,9 @@ import (
 )
 
 func Atoi_sfx(a string, sfx []suffix_mult) int64 {
+	if len(a) == 0 {
+		return 0
+	}
 	for i := range sfx {
 		if strings.HasSuffix(a, sfx[i].suffix) {
 			num, err := strconv.Atoi(strings.TrimSuffix(a, sfx[i].suffix))
