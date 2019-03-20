@@ -45,7 +45,7 @@ func (app *applets) Applet_nohup(args []string) {
 	}
 
 	if isatty.IsTerminal(os.Stderr.Fd()) {
-		syscall.Dup3(1, int(os.Stderr.Fd()), 0)
+		libbb.Dup2(1, int(os.Stderr.Fd()))
 	}
 
 	signal.Ignore(syscall.SIGHUP)
