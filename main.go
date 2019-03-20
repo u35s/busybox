@@ -13,7 +13,13 @@ type applets struct{}
 
 func main() {
 	app := &applets{}
-	app.Applet_main(os.Args)
+	app.main(os.Args)
+}
+
+func (app *applets) main(args []string) {
+	if !app.exec(args) {
+		fmt.Fprintln(os.Stderr, "applet not found\n")
+	}
 }
 
 func (app *applets) exec(args []string) bool {
@@ -27,11 +33,5 @@ func (app *applets) exec(args []string) bool {
 		return true
 	} else {
 		return false
-	}
-}
-
-func (app *applets) Applet_main(args []string) {
-	if !app.exec(args) {
-		fmt.Fprintln(os.Stderr, "applet not found\n")
 	}
 }
